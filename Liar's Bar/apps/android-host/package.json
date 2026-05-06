@@ -1,0 +1,9 @@
+{
+  "name": "@liars-bar/android-host",
+  "version": "1.0.0",
+  "description": "原生 Kotlin 安卓主机应用",
+  "main": "index.js",
+  "scripts": {
+    "android": "cd android && gradlew.bat assembleDebug"
+  }
+}

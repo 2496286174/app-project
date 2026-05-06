@@ -1,0 +1,40 @@
+{
+  "name": "@liars-bar/pc-host",
+  "version": "1.0.0",
+  "description": "PC 主机应用",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "node scripts/run-electron.cjs",
+    "dev:browser": "node scripts/run-browser-host.cjs",
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "@liars-bar/host-runtime": "file:../../packages/host-runtime",
+    "electron": "^40.2.1",
+    "express": "^4.18.2",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^26.7.0"
+  },
+  "build": {
+    "appId": "com.liarsbar.game",
+    "productName": "Liar's Bar",
+    "asar": false,
+    "files": [
+      "build/**/*",
+      "electron/**/*",
+      "scripts/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "../../dist/pc"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "dir"
+      ]
+    }
+  }
+}

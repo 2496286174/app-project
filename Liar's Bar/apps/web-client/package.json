@@ -1,0 +1,45 @@
+{
+  "name": "@liars-bar/web-client",
+  "version": "1.0.0",
+  "description": "浏览器客户端",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@liars-bar/shared": "file:../../packages/shared",
+    "@liars-bar/ui": "file:../../packages/ui",
+    "next": "16.2.4",
+    "qrcode": "^1.5.4",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "ws": "^8.17.0",
+    "zustand": "^5.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5"
+  },
+  "browserslist": {
+    "production": [
+      "chrome >= 91",
+      "chromeandroid >= 91",
+      "edge >= 91",
+      "firefox >= 90",
+      "ios_saf >= 15",
+      "safari >= 15"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

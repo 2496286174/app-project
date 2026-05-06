@@ -1,0 +1,19 @@
+{
+  "name": "@liars-bar/host-runtime",
+  "version": "1.0.0",
+  "description": "Shared LAN host runtime for Liar's Bar",
+  "main": "index.cjs",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "node -e \"require('./index.cjs')\"",
+    "test": "node -e \"const { createHostRuntime } = require('./index.cjs'); if (typeof createHostRuntime !== 'function') process.exit(1)\""
+  },
+  "dependencies": {
+    "@liars-bar/shared": "file:../shared",
+    "express": "^5.2.1",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@liars-bar/shared",
+  "version": "1.0.0",
+  "description": "共享游戏核心逻辑库",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "pnpm run clean && tsc",
+    "dev": "tsc --watch",
+    "test": "tsc && node dist/__tests__/game-logic.test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.4",
+    "@types/jest": "^29.5.12"
+  }
+}
