@@ -120,13 +120,12 @@ function collectWindowsRepoDevProcesses() {
   );
 
   const markers = [
-    'run-dev-pc.mjs',
-    'run-browser-host.cjs',
+    'run-dev-browser.mjs',
+    'run-browser-host.mjs',
     'next dev',
     '@liars-bar/shared',
     '@liars-bar/ui',
     '@liars-bar/web-client',
-    '@liars-bar/pc-host',
     'typescript/bin/tsc',
     'postcss.js'
   ];

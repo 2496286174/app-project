@@ -6,10 +6,21 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, '..');
 const sourceDir = path.join(repoRoot, 'apps', 'web-client', 'out');
 
-const targets = [
-  path.join(repoRoot, 'apps', 'pc-host', 'build'),
-  path.join(repoRoot, 'apps', 'android-host', 'web-assets', 'web')
-];
+const allTargets = {
+  pc: path.join(repoRoot, 'apps', 'pc-host', 'build'),
+  android: path.join(repoRoot, 'apps', 'android-host', 'web-assets', 'web')
+};
+
+const requestedTargets = process.argv.slice(2);
+const targetNames = requestedTargets.length > 0 ? requestedTargets : Object.keys(allTargets);
+const targets = targetNames.map((name) => {
+  const target = allTargets[name];
+  if (!target) {
+    throw new Error(`Unknown web asset target "${name}". Use one of: ${Object.keys(allTargets).join(', ')}`);
+  }
+
+  return target;
+});
 
 function ensureSourceExists() {
   if (!fs.existsSync(sourceDir)) {

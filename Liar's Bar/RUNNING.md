@@ -59,16 +59,16 @@ pnpm dev
 常用命令：
 
 ```bash
-# 构建共享逻辑、UI、前端静态资源，并同步到宿主目录
-pnpm build:hosts
+# 构建共享逻辑、UI、前端静态资源，并同步到 Android 宿主目录
+pnpm build:android-assets
 
-# 启动 PC 主机，会先自动执行 build:hosts
+# 启动 PC Edge/WebView2 候选主机，会先自动执行 build:pc-assets
 pnpm run:pc-host
 
-# 启动 PC 浏览器测试主机，不打开 Electron
+# 启动 PC 浏览器测试主机，不打开桌面壳
 pnpm run:pc-browser
 
-# 构建 Android 测试 APK，会先自动执行 build:hosts
+# 构建 Android 测试 APK，会先自动执行 build:android-assets
 pnpm run:android-host
 ```
 
@@ -95,7 +95,7 @@ http://<Android设备局域网IP>:<端口>/login?hostAddress=<Android设备局�
 
 ### debug APK
 
-`pnpm run:android-host` 会先执行 `pnpm run build:hosts`，再进入 Android 工程执行 debug 构建：
+`pnpm run:android-host` 会先执行 `pnpm run build:android-assets`，再进入 Android 工程执行 debug 构建：
 
 ```powershell
 pnpm run:android-host
@@ -112,7 +112,7 @@ apps/android-host/android/app/build/outputs/apk/debug/app-debug.apk
 release 包也必须先同步最新 Web 静态资源：
 
 ```powershell
-pnpm run build:hosts
+pnpm run build:android-assets
 ```
 
 然后使用 JDK 17 执行 release 构建：
@@ -146,7 +146,7 @@ Copy-Item -LiteralPath "apps/android-host/android/app/build/outputs/apk/release/
 1. 先在仓库根目录执行：
 
 ```powershell
-pnpm run build:hosts
+pnpm run build:android-assets
 ```
 
 2. 用 Android Studio 打开：
@@ -167,7 +167,7 @@ apps/android-host/android/app/build/outputs/apk/debug/app-debug.apk
 
 ## 8. PC 主机联机步骤
 
-PC Host 是辅助验证形态。
+PC Host 是基于 Microsoft Edge/WebView2 运行时的辅助验证形态，不再打包独立 Electron。
 
 1. 执行 `pnpm run:pc-host`。
 2. 主机启动后默认监听 `3000` 端口，也可通过 `HOST_PORT` 覆盖。

@@ -1,12 +1,22 @@
-const path = require('path');
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+
+const require = createRequire(import.meta.url);
 const { createHostRuntime } = require('@liars-bar/host-runtime');
 
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(scriptDir, '..');
 const disableStaticWeb = process.env.HOST_DISABLE_STATIC_WEB === '1';
+const webRoot = process.env.HOST_WEB_ROOT
+  ? path.resolve(repoRoot, process.env.HOST_WEB_ROOT)
+  : path.join(repoRoot, 'apps', 'web-client', 'out');
+
 const runtime = createHostRuntime({
-  platform: disableStaticWeb ? 'dev' : 'pc',
-  hostName: disableStaticWeb ? "Liar's Bar Dev Host" : "Liar's Bar PC Host",
+  platform: disableStaticWeb ? 'dev' : 'browser',
+  hostName: disableStaticWeb ? "Liar's Bar Dev Host" : "Liar's Bar Browser Host",
   port: Number(process.env.HOST_PORT || 3000),
-  webRoot: path.join(__dirname, '..', 'build'),
+  webRoot,
   disableStaticWeb,
   devInstructions: process.env.HOST_DEV_MESSAGE,
   devJoinUrl: process.env.HOST_DEV_JOIN_URL

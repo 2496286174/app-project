@@ -81,7 +81,7 @@ await runCommand(['run', 'build:ui']);
 
 startProcess('shared', ['--filter', '@liars-bar/shared', 'run', 'dev']);
 startProcess('ui', ['--filter', '@liars-bar/ui', 'run', 'dev']);
-startProcess('host', ['--filter', '@liars-bar/pc-host', 'run', 'dev:browser'], {
+startProcess('host', ['exec', 'node', './scripts/run-browser-host.mjs'], {
   HOST_PORT: hostPort,
   HOST_DISABLE_STATIC_WEB: '1',
   HOST_DEV_MESSAGE: hostDevMessage,
@@ -356,7 +356,7 @@ function findReusableHostProcess(processesById) {
 
   for (const processInfo of processesById.values()) {
     const commandLine = normalizeCommandText(processInfo?.CommandLine);
-    if (!commandLine.includes('scripts/run-browser-host.cjs')) {
+    if (!commandLine.includes('scripts/run-browser-host.mjs')) {
       continue;
     }
 
@@ -366,7 +366,7 @@ function findReusableHostProcess(processesById) {
         processInfo,
         (ancestor) => {
           const ancestorCommandLine = normalizeCommandText(ancestor?.CommandLine);
-          return ancestorCommandLine.includes('@liars-bar/pc-host') && ancestorCommandLine.includes('run dev:browser');
+          return ancestorCommandLine.includes('run-dev-browser.mjs');
         }
       )
     ) {
@@ -459,7 +459,7 @@ function printBanner() {
   if (Number(hostPort) !== requestedHostPort) {
     console.log(`HOST_PORT ${requestedHostPort} is occupied, switched to ${hostPort}`);
   }
-  console.log('PC/Android testing remains in packaged host mode via pnpm run:pc-browser / pnpm run:pc-host / pnpm run:android-host');
+  console.log('Android testing uses pnpm run:android-host; PC candidate uses pnpm run:pc-host with Edge/WebView2.');
 }
 
 function buildWebDevArgs() {

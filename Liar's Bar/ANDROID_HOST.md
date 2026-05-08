@@ -87,7 +87,7 @@ Android 端不应该再引入：
 - Node.js
 - Express
 - ws
-- Electron
+- 桌面 Chromium 运行时
 - Next.js dev server
 
 这些依赖对最终 App 没有必要，还会带来 APK 体积、启动速度、崩溃面、16 KB page size 对齐和调试复杂度问题。

@@ -38,7 +38,7 @@ Android 端不把桌面端或开发端运行时塞进 APK。
 - nodejs-mobile
 - Node/Express/ws 运行时
 - Next.js dev server
-- Electron
+- 桌面 Chromium 运行时
 
 这个边界是为了减少崩溃面、降低 APK 体积、提升启动稳定性，并避免 Android 16 KB page size 的 native `.so` 对齐问题。
 
@@ -121,7 +121,7 @@ App 内登录页承担这些职责：
 - `packages/ui`：React UI 组件。
 - `packages/shared`：Web/PC 共享类型、协议和规则工具。
 - `packages/host-runtime`：PC 端 HTTP + WebSocket 调试/辅助主机。
-- `apps/pc-host`：PC/Electron 或浏览器测试宿主。
+- `apps/pc-host`：PC Edge/WebView2 候选宿主。
 
 ### 3.2 Android 侧
 

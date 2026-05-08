@@ -64,7 +64,7 @@ Android App 启动后会直接：
 - `packages/shared` TypeScript watch
 - `packages/ui` TypeScript watch
 - `apps/web-client` Next.js dev server
-- `apps/pc-host` 局域网 WebSocket 调试主机
+- `scripts/run-browser-host.mjs` 局域网 WebSocket 调试主机
 
 开发模式默认端口：
 
@@ -81,10 +81,10 @@ pnpm dev
 
 ### 打包/宿主模式
 
-- `pnpm run:pc-browser`：构建静态资源后启动浏览器测试主机，不打开 Electron。
-- `pnpm run:pc-host`：构建静态资源后启动 PC/Electron 主机。
+- `pnpm run:pc-browser`：构建静态资源后启动浏览器测试主机，不打开桌面壳。
+- `pnpm run:pc-host`：构建静态资源后启动 PC Edge/WebView2 候选主机。
 - `pnpm run:android-host`：构建静态资源后生成 Android 测试 APK，Android App 启动后自动开服并进入 App 内登录流程。
-- release APK 手动构建入口：先执行 `pnpm run build:hosts`，再到 `apps/android-host/android` 执行 `.\gradlew.bat assembleRelease`。
+- release APK 手动构建入口：先执行 `pnpm run build:android-assets`，再到 `apps/android-host/android` 执行 `.\gradlew.bat assembleRelease`。
 
 打包/宿主模式下，浏览器访问：`http://<主机IP>:<端口>/`
 
@@ -102,7 +102,7 @@ Android 端不再引入：
 - Hermes
 - nodejs-mobile
 - Node/Express/ws 运行时
-- Electron
+- 桌面 Chromium 运行时
 - Next.js dev server
 
 这样做的原因很直接：App 是最终形态，内核越薄，启动越稳，APK 越小，16 KB page size 兼容风险越低。浏览器项目只在构建阶段导出静态 HTML/CSS/JS，作为 App 内 WebView 和外部浏览器玩家的界面资源。
@@ -124,7 +124,7 @@ Android 端不再引入：
 
 ```txt
 apps/web-client/       # 浏览器调试界面和外部玩家浏览器入口
-apps/pc-host/          # PC 调试/辅助宿主
+apps/pc-host/          # PC Edge/WebView2 候选宿主
 apps/android-host/     # 原生 Kotlin Android 主机 + WebView 玩家界面
 packages/shared/       # Web/PC 共享规则、协议和类型
 packages/host-runtime/ # PC 端 HTTP + WebSocket 调试主机运行时

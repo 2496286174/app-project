@@ -5,21 +5,17 @@ import { fileURLToPath } from 'node:url';
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, '..');
 
-const generatedPaths = [
-  '.dev-logs',
-  '.next',
-  'apps/web-client/.next',
-  'apps/web-client/out',
-  'apps/pc-host/build',
-  'apps/android-host/web-assets',
-  'apps/android-host/android/.gradle',
-  'apps/android-host/android/build',
-  'apps/android-host/android/app/build',
-  'packages/shared/dist',
-  'packages/ui/dist'
+const dependencyPaths = [
+  'node_modules',
+  'apps/android-host/node_modules',
+  'apps/pc-host/node_modules',
+  'apps/web-client/node_modules',
+  'packages/host-runtime/node_modules',
+  'packages/shared/node_modules',
+  'packages/ui/node_modules'
 ];
 
-for (const relativePath of generatedPaths) {
+for (const relativePath of dependencyPaths) {
   const absolutePath = path.resolve(repoRoot, relativePath);
   if (!isInsideRepo(absolutePath)) {
     throw new Error(`Refusing to clean outside repo: ${absolutePath}`);
@@ -33,7 +29,7 @@ for (const relativePath of generatedPaths) {
   console.log(`removed: ${relativePath}`);
 }
 
-console.log('Generated files cleaned.');
+console.log('Dependency folders cleaned.');
 
 function isInsideRepo(absolutePath) {
   return absolutePath === repoRoot || absolutePath.startsWith(`${repoRoot}${path.sep}`);
