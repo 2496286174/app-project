@@ -1,0 +1,40 @@
+# Dependency directories
+node_modules/
+**/node_modules/
+.pnpm-store/
+**/.pnpm-store/
+
+# Generated build output and caches
+**/.gradle/
+**/.kotlin/
+**/.next/
+**/.turbo/
+**/build/
+**/dist/
+**/out/
+**/coverage/
+*.tsbuildinfo
+
+# Local app/tool state
+**/.playwright-mcp/
+**/.vercel/
+**/.dev-logs/
+local.properties
+**/local.properties
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+
+# Repository migration backups
+.git-backups-*/
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+**/.idea/
+**/.vscode/*
+!**/.vscode/extensions.json
